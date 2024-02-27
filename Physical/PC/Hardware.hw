@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?AutomationStudio Version=4.7.5.60?>
+<?AutomationStudio Version=4.12.5.95 FileVersion="4.9"?>
 <Hardware xmlns="http://br-automation.co.at/AS/Hardware">
   <Module Name="X20CP1583" Type="X20CP1583" Version="1.6.0.0">
     <Connector Name="IF1">
@@ -7,6 +7,9 @@
     </Connector>
     <Connector Name="IF2">
       <Parameter ID="ActivateDevice" Value="1" />
+    </Connector>
+    <Connector Name="IF3">
+      <Parameter ID="DNAConfiguration" Value="manual" />
     </Connector>
     <Parameter ID="ConfigurationID" Value="ARuser_PC" />
     <Parameter ID="Simulation" Value="1" />

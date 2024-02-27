@@ -128,7 +128,7 @@ END_FUNCTION
 // --------------------------------------------------------------------------------------------------------------------
 // Is second string in first string																		
 FUNCTION IsInstr
-	IF (brsstrlen(string1) > brsstrlen(string2)) THEN
+	IF (brsstrlen(string1) >= brsstrlen(string2)) THEN
 		FOR idx:=0 TO brsstrlen(string1) - brsstrlen(string2) DO
 			IF (brsmemcmp(string1 + idx, string2, brsstrlen(string2)) = 0) THEN
 				IsInstr := TRUE;
