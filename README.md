@@ -26,9 +26,7 @@ Recommended task class is #8 with a 10ms cycle time.
 <a name="Revision-History"></a>
 ## Revision History
 
-#### Version 0.3
-* New update table command
-* New create entry command
-* Add max entries to parameter structure
-* Show table during run
-* Renamed facility to logbook and logbook name
+#### Version 0.4
+* Fixed desc sorting
+* Update to Automation Studio 4.12 and mapp 5.24
+* Added object ID (origin)
