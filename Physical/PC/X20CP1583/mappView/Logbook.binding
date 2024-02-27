@@ -233,5 +233,13 @@
 			<Source xsi:type="opcUa" refId="::AsGlobalPV:gLogbook.PAR.CreateSeverity" attribute="value" />
 			<Target xsi:type="brease" contentRefId="contentLogbook" widgetRefId="ddbSeverity" attribute="selectedIndex" />
 		</Binding>
-	</Bindings>
+	<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gLogbook.DAT.Entries.ObjectID" attribute="value" />
+<Target xsi:type="brease" contentRefId="contentLogbook" widgetRefId="tblLogbookObjectID" attribute="stringValue" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gLogbook.PAR.FilterObjectID" attribute="value" />
+<Target xsi:type="brease" contentRefId="contentLogbook" widgetRefId="txtFilterObjectID" attribute="value" />
+</Binding>
+</Bindings>
 </BindingsSet>

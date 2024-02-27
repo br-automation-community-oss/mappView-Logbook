@@ -11,6 +11,7 @@ TYPE
 		stateDetails2,
 		stateDetails3,
 		stateDetails4,
+		stateDetails5,
 		stateFilter,
 		statePrep,
 		stateError,
@@ -56,6 +57,7 @@ TYPE
 		EntriesMax : UINT; (*Maximum number of entries, shadow of LOGBOOK_ENTRIES_MAX*)
 		FilterErrorNo : UDINT; (*Filter by error number*)
 		FilterErrorText : STRING[LOGBOOK_TEXT_LEN]; (*Filter by error text*)
+		FilterObjectID : STRING[36]; (*Filter by object ID (origin)*)
 		FilterSeverity : ARRAY[0..3]OF BOOL := [4(TRUE)]; (*Filter by severity*)
 		FilterLogbook : ARRAY[0..LOGBOOK_BOOKS_MAX]OF BOOL := [14(TRUE)]; (*Filter by logbook*)
 		FilterDateStart : DATE; (*Filter by date*)
@@ -87,6 +89,7 @@ TYPE
 		Severity : ARRAY[1..LOGBOOK_ENTRIES_MAX]OF USINT; (*Severity*)
 		Code : ARRAY[1..LOGBOOK_ENTRIES_MAX]OF UINT; (*Code*)
 		FacilityCode : ARRAY[1..LOGBOOK_ENTRIES_MAX]OF UINT; (*Facility code*)
+		ObjectID : ARRAY[1..LOGBOOK_ENTRIES_MAX]OF STRING[36]; (*Obejct ID (origin)*)
 		LogbookName : ARRAY[1..LOGBOOK_ENTRIES_MAX]OF STRING[30]; (*Logbook text*)
 		ErrorNo : ARRAY[1..LOGBOOK_ENTRIES_MAX]OF DINT; (*Error number*)
 		ErrorText : ARRAY[1..LOGBOOK_ENTRIES_MAX]OF STRING[LOGBOOK_TEXT_LEN]; (*Error text*)

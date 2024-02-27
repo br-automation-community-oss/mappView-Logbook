@@ -22,6 +22,16 @@
 				</Action>
 			</EventHandler>
 		</EventBinding>
+		<EventBinding id="contentLogbook.txtFilterObjectID.ValueChanged">
+			<Source xsi:type="widgets.brease.TextInput.Event" contentRefId="contentLogbook" widgetRefId="txtFilterObjectID" event="ValueChanged" />
+			<EventHandler>
+				<Action>
+					<Target xsi:type="widgets.brease.Label.Action" contentRefId="contentLogbook" widgetRefId="labNotification">
+						<Method xsi:type="widgets.brease.Label.Action.SetText" text="Press refresh to update table" />
+					</Target>
+				</Action>
+			</EventHandler>
+		</EventBinding>
 		<EventBinding id="contentLogbook.dtDateStart.ValueChanged">
 			<Source xsi:type="widgets.brease.DateTimeInput.Event" contentRefId="contentLogbook" widgetRefId="dtDateStart" event="ValueChanged" />
 			<EventHandler>

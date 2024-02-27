@@ -313,7 +313,7 @@ PROGRAM _CYCLIC
 								END_IF
 							END_IF
 						END_IF
-						state := stateFilter;
+						state := stateDetails5;
 					// Error
 					ELSIF ArEventLogReadDescription_0.Error THEN
 						gLogbook.ERR.State := state;
@@ -322,7 +322,26 @@ PROGRAM _CYCLIC
 					END_IF
 				ELSE
 					state := stateFilter;
-				END_IF				
+				END_IF
+				// --------------------------------------------------------------------------------------------------------------------
+				// Read error object ID (origin)
+				// --------------------------------------------------------------------------------------------------------------------
+			stateDetails5:
+				ArEventLogReadObjectID_0.Execute := TRUE;
+				ArEventLogReadObjectID_0.Ident := Logbook.Ident[Logbook.CntLogbook];
+				ArEventLogReadObjectID_0.RecordID := Logbook.RecordID[Logbook.CntLogbook];
+				ArEventLogReadObjectID_0();
+
+				// Success
+				IF (ArEventLogReadObjectID_0.Done AND ArEventLogReadObjectID_0.StatusID = ERR_OK) THEN
+					objectID := ArEventLogReadObjectID_0.ObjectID;
+					state := stateFilter;
+				// Error
+				ELSIF ArEventLogReadObjectID_0.Error THEN
+					gLogbook.ERR.State := state;
+					gLogbook.Status := ArEventLogReadObjectID_0.StatusID;
+					state := stateError;
+				END_IF
 				// --------------------------------------------------------------------------------------------------------------------
 				// Apply filter settings
 				// --------------------------------------------------------------------------------------------------------------------
@@ -331,6 +350,7 @@ PROGRAM _CYCLIC
 				// Filters
 				cntFilterNo := 0;
 				cntFilterText := 0;
+				cntFilterObjectID := 0;
 				cntFilterLogbook := 0;
 				cntFilterSeverity := 0;
 				cntFilterDate := 0;
@@ -343,6 +363,11 @@ PROGRAM _CYCLIC
 				// Check if error text matches search string
 				IF gLogbook.PAR.FilterErrorText = '' OR IsInstr(ADR(ErrorText), ADR(gLogbook.PAR.FilterErrorText)) THEN
 					cntFilterText := cntFilterText + 1;
+				END_IF
+				// --------------------------------------------------------------------------------------------------------------------
+				// Check if object ID matches search string
+				IF gLogbook.PAR.FilterObjectID = '' OR IsInstr(ADR(objectID), ADR(gLogbook.PAR.FilterObjectID)) THEN
+					cntFilterObjectID := cntFilterObjectID + 1;
 				END_IF
 				// --------------------------------------------------------------------------------------------------------------------
 				// Make sure error number matches filter
@@ -379,7 +404,7 @@ PROGRAM _CYCLIC
 			
 				// --------------------------------------------------------------------------------------------------------------------
 				// Transfer data
-				IF cntFilterNo > 0 AND cntFilterText > 0 AND cntFilterLogbook > 0 AND cntFilterSeverity > 0 AND cntFilterDate > 0 THEN						
+				IF cntFilterNo > 0 AND cntFilterText > 0 AND cntFilterObjectID > 0 AND cntFilterLogbook > 0 AND cntFilterSeverity > 0 AND cntFilterDate > 0 THEN						
 					// --------------------------------------------------------------------------------------------------------------------
 					// Find new place for entry
 					idx := InsertEntry(ADR(gLogbook.DAT), ArEventLogRead_0.TimeStamp.sec, UDINT_TO_UINT(ArEventLogRead_0.TimeStamp.nsec/1000000), gLogbook.PAR.Sorting);
@@ -408,6 +433,7 @@ PROGRAM _CYCLIC
 						gLogbook.DAT.Entries.Code[idx] := GetCode(EventID := ArEventLogRead_0.EventID);
 						gLogbook.DAT.Entries.FacilityCode[idx] := GetFacility(EventID := ArEventLogRead_0.EventID);
 						gLogbook.DAT.Entries.LogbookName[idx] := LOGBOOK_TEXT[Logbook.CntLogbook];
+						gLogbook.DAT.Entries.ObjectID[idx] := objectID;
 						// Add error number and text, use event ID if error no is 0
 						IF ArEventLogReadErrorNumber_0.ErrorNumber <> 0 THEN
 							gLogbook.DAT.Entries.ErrorNo[idx] := ArEventLogReadErrorNumber_0.ErrorNumber;
@@ -443,6 +469,7 @@ PROGRAM _CYCLIC
 				ArEventLogReadErrorNumber_0(Execute := FALSE);
 				ArEventLogReadDescription_0(Execute := FALSE);
 				ArEventLogReadAddData_0(Execute := FALSE);
+				ArEventLogReadObjectID_0(Execute := FALSE);
 				
 				// --------------------------------------------------------------------------------------------------------------------
 				// Find next logbook from here to the end
