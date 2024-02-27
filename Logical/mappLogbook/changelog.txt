@@ -1,5 +1,7 @@
-Next Version
+Version 0.4
 - Fixed desc sorting
+- Update to Automation Studio 4.12 and mapp 5.24
+- Added object ID (origin)
 
 Version 0.3
 - New update table command
