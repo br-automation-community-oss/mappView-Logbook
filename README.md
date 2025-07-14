@@ -13,7 +13,7 @@ This is a sample project to read the PLC logbook with mappView. It uses the B&R 
 
 ![](Logical/mappView/Resources/Media/Logbook/screenshot.png)
 
-Also see [**How to import the user management into an existing project.**](Logical/mappLogbook/HowToImport.pdf) Download the latest release from [**here.**](https://github.com/br-automation-com/mappView-Logbook/releases/latest) Detailed information are available in the [**Wiki**](https://github.com/br-automation-com/mappView-Logbook/wiki).
+Also see [**How to import the user management into an existing project.**](Logical/mappLogbook/HowToImport.pdf) Download the latest release from [**here.**](https://github.com/br-automation-community/mappView-Logbook/releases/latest) Detailed information are available in the [**Wiki**](https://github.com/br-automation-community/mappView-Logbook/wiki).
 
 <a name="Requirements"></a>
 ## Requirements
